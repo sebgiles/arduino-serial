@@ -18,7 +18,7 @@
 #include <fcntl.h>    // File control definitions
 #include <errno.h>    // Error number definitions
 #include <termios.h>  // POSIX terminal control definitions
-#include <string.h>   // String function definitions (Sebgiles)
+#include <string.h>   // String function definitions
 #include <sys/ioctl.h>
 
 // uncomment this to debug reads
