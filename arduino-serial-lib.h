@@ -3,7 +3,7 @@
 //
 // 2006-2013, Tod E. Kurt, http://todbot.com/blog/
 //
-// Sebastian Giles added: _readbytes, _peek, _readbytes, _writebytes
+// Sebastian Giles added: _readbytes, _readbytes, _writebytes
 
 
 
@@ -21,7 +21,6 @@ int serialport_flush(int fd);
 
 int serialport_readbytes(int fd, char* buf, int len);
 int serialport_readbyte(int fd);
-int serialport_peek(int fd);
 int serialport_writebytes(int fd, const char* str, int len);
 
 

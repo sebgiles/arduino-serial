@@ -5,7 +5,6 @@
 //
 
 //Modifications by Sebastian Giles (Sebgiles) marked throughout the code:
-// + added a function to peek a single char
 // + added a function to read a single char
 // + added a function to read a requested number of bytes with no timeout
 // + added a function to send a plain char* with given length
@@ -154,18 +153,6 @@ int serialport_flush(int fd)
 {
     sleep(2); //required to make flush work, for some reason
     return tcflush(fd, TCIOFLUSH);
-}
-
-//Addition by Sebastian Giles ==================================================
-int serialport_peek(int fd)
-{
-  static int n= -1;
-  if (n!=-1) return n;
-  char b[1];  // read expects an array, so we give it a 1-byte array
-
-  n = read(fd, b, 1);  // read a char
-  if( n!=1 ) return (n=-1); // (nothing to / couldn't)read
-  return (n=b[0]);
 }
 
 //Addition by Sebastian Giles
