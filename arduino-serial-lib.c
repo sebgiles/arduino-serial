@@ -8,8 +8,7 @@
 // + added a function to peek a single char
 // + added a function to read a single char
 // + added a function to read a requested number of bytes with no timeout
-// + edited the write function to also send char* ingoring null terminators if
-//   length is given
+// + added a function to send a plain char* with given length
 
 
 #include "arduino-serial-lib.h"
@@ -114,12 +113,12 @@ int serialport_writebyte( int fd, uint8_t b)
 }
 
 //
-int serialport_write(int fd, const char* str, int len)
+int serialport_write(int fd, const char* str)
 {
-    if (len<0) len = strlen(str); //small edit by Sebgiles
+    int len = strlen(str);
     int n = write(fd, str, len);
     if( n!=len ) {
-        perror("serialport_write: couldn't write whole string/array\n");
+        perror("serialport_write: couldn't write whole string \n");
         return -1;
     }
     return 0;
@@ -170,7 +169,7 @@ int serialport_peek(int fd)
 }
 
 //Addition by Sebastian Giles
-int serialport_read(int fd)
+int serialport_readbyte(int fd)
 {
   char b[1];  // read expects an array, so we give it a 1-byte array
   int n = read(fd, b, 1);  // read a char
@@ -179,7 +178,7 @@ int serialport_read(int fd)
 }
 
 //Addition by Sebastian Giles
-int serialport_read_patient(int fd, char* buf, int len)
+int serialport_readbytes(int fd, char* buf, int len)
 {
     char b[1];  // read expects an array, so we give it a 1-byte array
     int i=0;
@@ -197,5 +196,16 @@ int serialport_read_patient(int fd, char* buf, int len)
         i++;
     } while(i < len);
 
+    return 0;
+}
+
+//Addition by Sebgiles
+int serialport_writebytes(int fd, const char* str, int len)
+{
+    int n = write(fd, str, len);
+    if( n!=len ) {
+        perror("serialport_write: couldn't write whole array\n");
+        return -1;
+    }
     return 0;
 }

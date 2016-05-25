@@ -3,7 +3,7 @@
 //
 // 2006-2013, Tod E. Kurt, http://todbot.com/blog/
 //
-// Functions added by Sebastian Giles: _read_patient, _peek, _read
+// Sebastian Giles added: _readbytes, _peek, _readbytes, _writebytes
 
 
 
@@ -15,12 +15,14 @@
 int serialport_init(const char* serialport, int baud);
 int serialport_close(int fd);
 int serialport_writebyte( int fd, uint8_t b);
-int serialport_write(int fd, const char* str, int len=-1);
+int serialport_write(int fd, const char* str);
 int serialport_read_until(int fd, char* buf, char until, int buf_max,int timeout);
 int serialport_flush(int fd);
 
-int serialport_read_patient(int fd, char* buf, int len);
-int serialport_read(int fd);
+int serialport_readbytes(int fd, char* buf, int len);
+int serialport_readbyte(int fd);
 int serialport_peek(int fd);
+int serialport_writebytes(int fd, const char* str, int len);
+
 
 #endif
